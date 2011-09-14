@@ -73,6 +73,13 @@ describe("The TMinus plugin", function() {
   describe("tminusReset", function() {
   });
 
+  describe("tminusTimeRemaining", function() {
+    it("returns tminus.time_remaining value", function() {
+      $tminus.tminusInit();
+      expect($tminus.tminusTimeRemaining()).toEqual($tminus.data("tminus.duration"));
+    });
+  });
+
   describe("tminusStatus", function() {
     it("returns tminus.state value", function() {
       expect($tminus.tminusStatus()).toBeUndefined();

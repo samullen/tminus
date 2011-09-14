@@ -16,6 +16,7 @@
       tminus
         .data("tminus.state", "not_started")
         .data("tminus.duration", settings.duration)
+        .data("tminus.time_remaining", settings.duration)
         .data("tminus.settings", settings);
 
       return this;
@@ -24,20 +25,38 @@
     tminusStart: function() {
       var tminus = this;
 
-      tminus.text("3600")
-        .data("tminus.state", "running");
+      return this.each(function() {
+        tminus.text("3600")
+          .data("tminus.state", "running");
+
+        var intervalId = setInterval(function() {
+          if (tminus.IsRunning()) {
+//            tminus.data
+// decrement time left
+// 
+          // update display
+          // fire tick event
+          // check status
+          // fire expiration event if necessary
+          // terminate if necessary
+          }
+          else {
+            clearInterval(intervalId);
+          }
+        }, 1000);
+      });
+    },
+
+    tminusTimeRemaining: function() {
+      return this.data("tminus.time_remaining");
     },
 
     tminusStatus: function() {
-      var tminus = this;
-      
-      return tminus.data("tminus.state");
+      return this.data("tminus.state");
     },
 
     tminusIsRunning: function() {
-      var tminus = this;
-
-      if (tminus.tminusStatus() == "running") {
+      if (this.tminusStatus() == "running") {
         return true;
       }
       else {
@@ -46,9 +65,7 @@
     },
 
     tminusIsPaused: function() {
-      var tminus = this;
-
-      if (tminus.tminusStatus() == "paused") {
+      if (this.tminusStatus() == "paused") {
         return true;
       }
       else {
@@ -57,9 +74,7 @@
     },
 
     tminusIsNotStarted: function() {
-      var tminus = this;
-
-      if (tminus.tminusStatus() == "not_started") {
+      if (this.tminusStatus() == "not_started") {
         return true;
       }
       else {
