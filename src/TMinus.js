@@ -31,14 +31,17 @@
 
         var intervalId = setInterval(function() {
           if (tminus.IsRunning()) {
-//            tminus.data
-// decrement time left
-// 
-          // update display
+            tminus.tminusDecrementCounter();
+
+            if (tminus.tminusTimeRemaining() == 0) {
+// fire expiration event
+            }
+
           // fire tick event
           // check status
           // fire expiration event if necessary
           // terminate if necessary
+          // update display
           }
           else {
             clearInterval(intervalId);

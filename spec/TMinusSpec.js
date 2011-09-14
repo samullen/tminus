@@ -62,12 +62,18 @@ describe("The TMinus plugin", function() {
   });
 
   describe("tminusTerminate", function() {
+// sets status to not_running
+// sets time remaining to duration
   });
 
   describe("tminusExpire", function() {
+// sets status to not_running
+// sets time remaining to duration
+// fires function
   });
 
   describe("tminusPause", function() {
+// sets status to paused
   });
 
   describe("tminusReset", function() {
