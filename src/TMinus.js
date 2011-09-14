@@ -28,5 +28,21 @@
         .data("tminus.state", "running");
     },
 
+    tminusStatus: function() {
+      var tminus = this;
+      
+      return tminus.data("tminus.state");
+    },
+
+    tminusIsRunning: function() {
+      var tminus = this;
+
+      if (tminus.tminusStatus() == "running") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
   });
 })(jQuery);

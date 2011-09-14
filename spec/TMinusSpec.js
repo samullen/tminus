@@ -70,13 +70,27 @@ describe("The TMinus plugin", function() {
   describe("tminusPause", function() {
   });
 
-  describe("tminusStatus", function() {
-  });
-
   describe("tminusReset", function() {
   });
 
+  describe("tminusStatus", function() {
+    it("returns tminus.state value", function() {
+      expect($tminus.tminusStatus()).toBeUndefined();
+      $tminus.data("tminus.state", "running");
+      expect($tminus.tminusStatus()).toEqual("running");
+    });
+  });
+
   describe("tminusIsRunning", function() {
+    it("returns true if timer is running", function() {
+      $tminus.data("tminus.state", "running");
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+    })
+
+    it("returns false if timer is not running", function() {
+      expect($tminus.tminusIsRunning()).toBeFalsy();
+    })
+
   });
   describe("tminusIsPaused", function() {
   });
