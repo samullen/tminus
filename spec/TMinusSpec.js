@@ -90,12 +90,27 @@ describe("The TMinus plugin", function() {
     it("returns false if timer is not running", function() {
       expect($tminus.tminusIsRunning()).toBeFalsy();
     })
+  });
 
-  });
   describe("tminusIsPaused", function() {
+    it("returns true if timer is paused", function() {
+      $tminus.data("tminus.state", "paused");
+      expect($tminus.tminusIsPaused()).toBeTruthy();
+    })
+
+    it("returns false if timer is not paused", function() {
+      expect($tminus.tminusIsPaused()).toBeFalsy();
+    })
   });
-  describe("tminusIsStarted", function() {
-  });
+
   describe("tminusIsNotStarted", function() {
+    it("returns true if timer is not started", function() {
+      $tminus.data("tminus.state", "not_started");
+      expect($tminus.tminusIsNotStarted()).toBeTruthy();
+    })
+
+    it("returns false if timer is not started", function() {
+      expect($tminus.tminusIsNotStarted()).toBeFalsy();
+    })
   });
 });

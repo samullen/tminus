@@ -43,6 +43,28 @@
       else {
         return false;
       }
+    },
+
+    tminusIsPaused: function() {
+      var tminus = this;
+
+      if (tminus.tminusStatus() == "paused") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    },
+
+    tminusIsNotStarted: function() {
+      var tminus = this;
+
+      if (tminus.tminusStatus() == "not_started") {
+        return true;
+      }
+      else {
+        return false;
+      }
     }
   });
 })(jQuery);
