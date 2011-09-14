@@ -1,24 +1,32 @@
 (function($) {
-  function init(params) {
+  function mergeDefaults(params) {
     return $.extend({
       duration: 3600,
       tick_event: function() {},
-      termination_event: {},
-      expiration_event: {},
+      termination_event: function() {},
+      expiration_event: function() {},
     }, params);
   }
 
   $.fn.extend({
-    initTimer: function(params) {
-      var settings = init(params);
+    tminusInit: function(params) {
+      var settings = mergeDefaults(params);
       var tminus = this;
 
-      tminus.
-        data("tminus.state", "not_started").
-        data("tminus.duration", settings.duration).
-        data("tminus.settings", settings);
+      tminus
+        .data("tminus.state", "not_started")
+        .data("tminus.duration", settings.duration)
+        .data("tminus.settings", settings);
 
       return this;
     },
+
+    tminusStart: function() {
+      var tminus = this;
+
+      tminus.text("3600")
+        .data("tminus.state", "running");
+    },
+
   });
 })(jQuery);
