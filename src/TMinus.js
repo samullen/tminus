@@ -51,6 +51,12 @@
       return this.data("tminus.time_remaining");
     },
 
+    tminusDecrementCounter: function() {
+      var timeleft = this.tminusTimeRemaining() - 1;
+      this.data("tminus.time_remaining", timeleft);
+      return this.tminusTimeRemaining();
+    },
+
     tminusStatus: function() {
       return this.data("tminus.state");
     },

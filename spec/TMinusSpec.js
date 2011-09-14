@@ -80,6 +80,14 @@ describe("The TMinus plugin", function() {
     });
   });
 
+  describe("tminusDecrementCounter", function() {
+    it("subtracts 1 from tminus.time_remaining", function() {
+      $tminus.tminusInit();
+      timeleft = $tminus.tminusTimeRemaining() - 1;
+      expect($tminus.tminusDecrementCounter()).toEqual(timeleft);
+    });
+  });
+
   describe("tminusStatus", function() {
     it("returns tminus.state value", function() {
       expect($tminus.tminusStatus()).toBeUndefined();
