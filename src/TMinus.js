@@ -50,6 +50,24 @@
       });
     },
 
+    tminusTerminate: function() {
+      this.data("tminus.state", "not_started")
+        .data("time_remaining", this.tminusDuration());
+    },
+
+    tminusReset: function() {
+      this.data("tminus.state", "not_started")
+        .data("time_remaining", this.tminusDuration());
+    },
+
+    tminusPause: function() {
+      this.data("tminus.state", "paused");
+    },
+
+    tminusDuration: function() {
+      return this.data("tminus.duration");
+    },
+
     tminusTimeRemaining: function() {
       return this.data("tminus.time_remaining");
     },

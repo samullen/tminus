@@ -62,8 +62,22 @@ describe("The TMinus plugin", function() {
   });
 
   describe("tminusTerminate", function() {
-// sets status to not_running
-// sets time remaining to duration
+    beforeEach(function() {
+      $tminus.tminusInit();
+      $tminus.tminusStart();
+    });
+
+    it("sets time remaining to duration", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusTerminate();
+      expect($tminus.tminusTimeRemaining()).toEqual($tminus.tminusDuration());
+    });
+
+    it("sets status to not_running", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusTerminate();
+      expect($tminus.tminusIsRunning()).toBeFalsy();
+    });
   });
 
   describe("tminusExpire", function() {
@@ -73,10 +87,43 @@ describe("The TMinus plugin", function() {
   });
 
   describe("tminusPause", function() {
-// sets status to paused
+    beforeEach(function() {
+      $tminus.tminusInit();
+      $tminus.tminusStart();
+    });
+
+    it("sets status to paused", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusPause();
+      expect($tminus.tminusIsRunning()).toBeFalsy();
+      expect($tminus.tminusIsPaused()).toBeTruthy();
+    });
   });
 
   describe("tminusReset", function() {
+    beforeEach(function() {
+      $tminus.tminusInit();
+      $tminus.tminusStart();
+    });
+
+    it("sets time remaining to duration", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusReset();
+      expect($tminus.tminusTimeRemaining()).toEqual($tminus.tminusDuration());
+    });
+
+    it("sets status to not_running", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusReset();
+      expect($tminus.tminusIsRunning()).toBeFalsy();
+    });
+  });
+
+  describe("tminusDuration", function() {
+    it("returns tminus.duration value", function() {
+      $tminus.tminusInit();
+      expect($tminus.tminusDuration()).toEqual($tminus.data("tminus.duration"));
+    });
   });
 
   describe("tminusTimeRemaining", function() {
