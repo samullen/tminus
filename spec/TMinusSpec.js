@@ -61,6 +61,25 @@ describe("The TMinus plugin", function() {
     });
   });
 
+  describe("tminusExpire", function() {
+    beforeEach(function() {
+      $tminus.tminusInit();
+      $tminus.tminusStart();
+    });
+
+    it("sets time remaining to zero", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusExpire();
+      expect($tminus.tminusTimeRemaining()).toEqual(0);
+    });
+
+    it("sets status to expired", function() {
+      expect($tminus.tminusIsRunning()).toBeTruthy();
+      $tminus.tminusExpire();
+      expect($tminus.tminusIsExpired()).toBeTruthy();
+    });
+  });
+
   describe("tminusTerminate", function() {
     beforeEach(function() {
       $tminus.tminusInit();
@@ -78,12 +97,6 @@ describe("The TMinus plugin", function() {
       $tminus.tminusTerminate();
       expect($tminus.tminusIsRunning()).toBeFalsy();
     });
-  });
-
-  describe("tminusExpire", function() {
-// sets status to not_running
-// sets time remaining to duration
-// fires function
   });
 
   describe("tminusPause", function() {
@@ -179,6 +192,17 @@ describe("The TMinus plugin", function() {
 
     it("returns false if timer is not started", function() {
       expect($tminus.tminusIsNotStarted()).toBeFalsy();
+    })
+  });
+
+  describe("tminusIsExpired", function() {
+    it("returns true if timer is expired", function() {
+      $tminus.data("tminus.state", "expired");
+      expect($tminus.tminusIsExpired()).toBeTruthy();
+    })
+
+    it("returns false if timer is not expired", function() {
+      expect($tminus.tminusIsExpired()).toBeFalsy();
     })
   });
 });

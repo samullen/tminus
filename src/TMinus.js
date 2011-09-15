@@ -52,12 +52,17 @@
 
     tminusTerminate: function() {
       this.data("tminus.state", "not_started")
-        .data("time_remaining", this.tminusDuration());
+        .data("tminus.time_remaining", this.tminusDuration());
+    },
+
+    tminusExpire: function() {
+      this.data("tminus.state", "expired")
+        .data("tminus.time_remaining", 0);
     },
 
     tminusReset: function() {
       this.data("tminus.state", "not_started")
-        .data("time_remaining", this.tminusDuration());
+        .data("tminus.time_remaining", this.tminusDuration());
     },
 
     tminusPause: function() {
@@ -107,6 +112,15 @@
       else {
         return false;
       }
-    }
+    },
+
+    tminusIsExpired: function() {
+      if (this.tminusStatus() == "expired") {
+        return true;
+      }
+      else {
+        return false;
+      }
+    },
   });
 })(jQuery);
