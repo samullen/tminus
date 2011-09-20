@@ -48,17 +48,24 @@ describe("The TMinus plugin", function() {
 
   describe("tminusStart", function() {
     beforeEach(function() {
-      $tminus.tminusInit();
-      $tminus.tminusStart();
+      $tminus.tminusInit().tminusStart();
+//      $tminus.tminusStart();
     });
-
-    it("sets elements' text value to the formatted duration", function() {
-      expect($tminus.text()).toEqual("3600");
-    })
 
     it("sets status to 'running'", function() {
       expect($tminus.data("tminus.state")).toEqual("running");
     });
+
+    it("sets elements' text value to the formatted duration", function() {
+      expect($tminus.text()).toEqual("1:00");
+    })
+
+    it("calls a tick event if applicable", function() {
+    });
+
+    it("calls the expire event if time-left is zero", function() {
+    });
+
   });
 
   describe("tminusExpire", function() {
