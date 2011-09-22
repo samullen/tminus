@@ -8,7 +8,11 @@
   <div id='timer'>foo</div>
 
   <script type='text/javascript'>
-    $("#timer").tminusInit().tminusStart();
+    $("#timer").tminusInit({
+      tick_event: function() {
+        console.log("got here");
+      }
+    }).tminusStart();
   </script>
 
 </body>

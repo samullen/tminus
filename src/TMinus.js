@@ -49,44 +49,44 @@
     },
 
     tminusTerminate: function() {
-      this.data("tminus.state", "not_started")
-        .data("tminus.time_remaining", this.tminusDuration());
+      $(this).data("tminus.state", "not_started")
+        .data("tminus.time_remaining", $(this).tminusDuration());
     },
 
     tminusExpire: function() {
-      this.data("tminus.state", "expired")
+      $(this).data("tminus.state", "expired")
         .data("tminus.time_remaining", 0);
     },
 
     tminusReset: function() {
-      this.data("tminus.state", "not_started")
-        .data("tminus.time_remaining", this.tminusDuration());
+      $(this).data("tminus.state", "not_started")
+        .data("tminus.time_remaining", $(this).tminusDuration());
     },
 
     tminusPause: function() {
-      this.data("tminus.state", "paused");
+      $(this).data("tminus.state", "paused");
     },
 
     tminusDuration: function() {
-      return this.data("tminus.duration");
+      return $(this).data("tminus.duration");
     },
 
     tminusTimeRemaining: function() {
-      return this.data("tminus.time_remaining");
+      return $(this).data("tminus.time_remaining");
     },
 
     tminusDecrementCounter: function() {
-      var timeleft = this.tminusTimeRemaining() - 1;
-      this.data("tminus.time_remaining", timeleft);
-      return this.tminusTimeRemaining();
+      var timeleft = $(this).tminusTimeRemaining() - 1;
+      $(this).data("tminus.time_remaining", timeleft);
+      return $(this).tminusTimeRemaining();
     },
 
     tminusStatus: function() {
-      return this.data("tminus.state");
+      return $(this).data("tminus.state");
     },
 
     tminusIsRunning: function() {
-      if (this.tminusStatus() == "running") {
+      if ($(this).tminusStatus() == "running") {
         return true;
       }
       else {
@@ -95,7 +95,7 @@
     },
 
     tminusIsPaused: function() {
-      if (this.tminusStatus() == "paused") {
+      if ($(this).tminusStatus() == "paused") {
         return true;
       }
       else {
@@ -104,7 +104,7 @@
     },
 
     tminusIsNotStarted: function() {
-      if (this.tminusStatus() == "not_started") {
+      if ($(this).tminusStatus() == "not_started") {
         return true;
       }
       else {
