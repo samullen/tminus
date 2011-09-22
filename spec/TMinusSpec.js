@@ -57,7 +57,7 @@ describe("The TMinus plugin", function() {
     });
 
     it("sets elements' text value to the formatted duration", function() {
-      expect($tminus.text()).toEqual("1:00");
+      expect($tminus.text()).toEqual("3600");
     })
 
     it("calls a tick event if applicable", function() {
