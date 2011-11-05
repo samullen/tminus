@@ -128,5 +128,8 @@
         return false;
       }
     },
+
+    tminusFormattedTimeRemaining: function() {
+    },
   });
 })(jQuery);

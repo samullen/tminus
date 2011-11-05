@@ -220,4 +220,14 @@ describe("The TMinus plugin", function() {
       expect($tminus.tminusIsExpired()).toBeFalsy();
     })
   });
+
+  describe("tminusFormattedTimeRemaining", function() {
+    it("returns time string formatted to 'mm:ss' by default", function() {
+      $tminus.data("tminus.duration", 1234);
+      expect($tminus.tminusFormattedTimeRemaining()).toEqual("12:34");
+    });
+
+//    it("returns time string according to supplied format", function() {
+//    });
+  });
 });
