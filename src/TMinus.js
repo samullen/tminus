@@ -28,18 +28,16 @@
       tminus.data("tminus.state", "running");
 
       return tminus.each(function() {
-
         var intervalId = setInterval(function() {
           if (tminus.tminusIsRunning()) {
             tminus.tminusDecrementCounter();
-
-            tminus.data("tminus.settings").tick_event();
 
             if (tminus.tminusTimeRemaining() > 0) {
               tminus.tminusTickEvent();
             }
             else if (tminus.tminusTimeRemaining() <= 0) {
               tminus.tminusExpireEvent();
+              tminus.tminusTerminate();
             }
 
             tminus.text(tminus.tminusTimeRemaining);
@@ -60,8 +58,7 @@
     },
 
     tminusTerminate: function() {
-      $(this).data("tminus.state", "not_started")
-        .data("tminus.time_remaining", $(this).tminusDuration());
+      $(this).data("tminus.state", "not_started");
     },
 
     tminusExpire: function() {
