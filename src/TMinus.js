@@ -35,8 +35,11 @@
 
             tminus.data("tminus.settings").tick_event();
 
-            if (tminus.tminusTimeRemaining() <= 0) {
+            if (tminus.tminusTimeRemaining() > 0) {
               tminus.tminusTickEvent();
+            }
+            else if (tminus.tminusTimeRemaining() <= 0) {
+              tminus.tminusExpireEvent();
             }
 
             tminus.text(tminus.tminusTimeRemaining);
