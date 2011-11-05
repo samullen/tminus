@@ -221,13 +221,26 @@ describe("The TMinus plugin", function() {
     })
   });
 
+  describe("tminusTimeFormat", function() {
+    it("returns the define time format", function() {
+      $tminus.tminusInit();
+      expect($tminus.tminusTimeFormat()).toEqual("%M:%S");
+    });
+  });
+
   describe("tminusFormattedTimeRemaining", function() {
     it("returns time string formatted to 'mm:ss' by default", function() {
-      $tminus.data("tminus.duration", 1234);
-      expect($tminus.tminusFormattedTimeRemaining()).toEqual("12:34");
+      $tminus.tminusInit({duration: 1234});
+      expect($tminus.tminusFormattedTimeRemaining()).toEqual("20:34");
     });
 
-//    it("returns time string according to supplied format", function() {
-//    });
+    it("returns time string according to supplied format", function() {
+      $tminus.tminusInit({duration: 95696, time_format: "%D:%H:%M:%S"});
+
+      expect($tminus.tminusFormattedTimeRemaining()).toEqual("01:02:34:56");
+
+      $tminus.data("tminus.time_format", "%d day(s), %h hour(s), %m minute(s), %s second(s)");
+      expect($tminus.tminusFormattedTimeRemaining()).toEqual("1 day(s), 2 hour(s), 34 minute(s), 56 second(s)");
+    });
   });
 });

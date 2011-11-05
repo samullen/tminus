@@ -2,6 +2,7 @@
   function mergeDefaults(params) {
     return $.extend({
       duration: 3600,
+      time_format: "%M:%S",
       tick_event: function() {},
       termination_event: function() {},
       expire_event: function() {},
@@ -16,6 +17,7 @@
       tminus
         .data("tminus.state", "not_started")
         .data("tminus.duration", settings.duration)
+        .data("tminus.time_format", settings.time_format)
         .data("tminus.time_remaining", settings.duration)
         .data("tminus.settings", settings)
         .text(tminus.tminusTimeRemaining());
@@ -130,6 +132,28 @@
     },
 
     tminusFormattedTimeRemaining: function() {
+      time_remaining = $(this).tminusTimeRemaining();
+      time_string = $(this).tminusTimeFormat();
+
+      seconds = time_remaining % 60;
+      minutes = ((time_remaining - seconds) % 3600 / 60);
+      hours   = ((time_remaining - (minutes * 60) - seconds) % 86400 / 3600);
+      days    = (time_remaining - (hours * 3600) - (minutes * 60) - seconds) / 86400;
+
+      time_string = time_string.replace(/\%s/, seconds);
+      time_string = time_string.replace(/\%S/, ("0" + seconds).slice(-2));
+      time_string = time_string.replace(/\%m/, minutes);
+      time_string = time_string.replace(/\%M/, ("0" + minutes).slice(-2));
+      time_string = time_string.replace(/\%h/, hours);
+      time_string = time_string.replace(/\%H/, ("0" + hours).slice(-2));
+      time_string = time_string.replace(/\%d/, days);
+      time_string = time_string.replace(/\%D/, ("0" + days).slice(-2));
+
+      return(time_string);
+    },
+
+    tminusTimeFormat: function() {
+      return $(this).data("tminus.time_format");
     },
   });
 })(jQuery);
