@@ -49,7 +49,6 @@ describe("The TMinus plugin", function() {
   describe("tminusStart", function() {
     beforeEach(function() {
       $tminus.tminusInit().tminusStart();
-//      $tminus.tminusStart();
     });
 
     it("sets status to 'running'", function() {
@@ -61,20 +60,19 @@ describe("The TMinus plugin", function() {
     })
 
     it("calls a tick event if applicable", function() {
-//      $tminus.tminusInit({ 
-//        tick_event: function() {console.log("tick event")} 
-//      }).tminusStart();
+      $tminus.tminusInit({ 
+        tick_event: function() {console.log("tick event")} 
+      }).tminusStart();
 
-      spyOn($tminus, "data('tminus.settings').tick_event");
+      spyOn($tminus, "tminusTickEvent");
 
       setTimeout(function() {
-        expect($tminus.data('tminus.settings').tick_event).toHaveBeenCalled();
+        expect($tminus.tminusTickEvent()).toHaveBeenCalled();
       }, 1500);
     });
 
     it("calls the expire event if time-left is zero", function() {
     });
-
   });
 
   describe("tminusExpire", function() {

@@ -48,6 +48,10 @@
       });
     },
 
+    tminusTickEvent: function() {
+      $(this).data("tminus.settings").tick_event();
+    },
+
     tminusTerminate: function() {
       $(this).data("tminus.state", "not_started")
         .data("tminus.time_remaining", $(this).tminusDuration());
