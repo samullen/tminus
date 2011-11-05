@@ -9,8 +9,12 @@
 
   <script type='text/javascript'>
     $("#timer").tminusInit({
+      duration: 10,
       tick_event: function() {
-        console.log("got here");
+        console.log("Tick");
+      },
+      expire_event: function() {
+        console.log("Expired");
       }
     }).tminusStart();
   </script>
