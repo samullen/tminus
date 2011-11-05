@@ -4,7 +4,7 @@
       duration: 3600,
       tick_event: function() {},
       termination_event: function() {},
-      expiration_event: function() {},
+      expire_event: function() {},
     }, params);
   }
 
@@ -36,7 +36,7 @@
             tminus.data("tminus.settings").tick_event();
 
             if (tminus.tminusTimeRemaining() <= 0) {
-              tminus.data("tminus.settings").expiration_event();
+              tminus.tminusTickEvent();
             }
 
             tminus.text(tminus.tminusTimeRemaining);
@@ -50,6 +50,10 @@
 
     tminusTickEvent: function() {
       $(this).data("tminus.settings").tick_event();
+    },
+
+    tminusExpireEvent: function() {
+      $(this).data("tminus.settings").expire_event();
     },
 
     tminusTerminate: function() {

@@ -18,7 +18,7 @@ describe("The TMinus plugin", function() {
           toEqual(empty_function());
         expect($tminus.data("tminus.settings").termination_event()).
           toEqual(empty_function());
-        expect($tminus.data("tminus.settings").expiration_event()).
+        expect($tminus.data("tminus.settings").expire_event()).
           toEqual(empty_function());
       });
     });
@@ -31,7 +31,7 @@ describe("The TMinus plugin", function() {
           duration: 10,
           tick_event: function() { return "tick" },
           termination_event: function() { return "termination" },
-          expiration_event: function() { return "expiration" },
+          expire_event: function() { return "expiration" },
         });
 
         expect($tminus.data("tminus.state")).toEqual("not_started");
@@ -39,7 +39,7 @@ describe("The TMinus plugin", function() {
         expect($tminus.data("tminus.settings").tick_event()).toEqual("tick");
         expect($tminus.data("tminus.settings").termination_event())
           .toEqual("termination");
-        expect($tminus.data("tminus.settings").expiration_event())
+        expect($tminus.data("tminus.settings").expire_event())
           .toEqual("expiration");
       });
     });
@@ -47,15 +47,13 @@ describe("The TMinus plugin", function() {
   });
 
   describe("tminusStart", function() {
-    beforeEach(function() {
-      $tminus.tminusInit().tminusStart();
-    });
-
     it("sets status to 'running'", function() {
+      $tminus.tminusInit().tminusStart();
       expect($tminus.data("tminus.state")).toEqual("running");
     });
 
     it("sets elements' text value to the formatted duration", function() {
+      $tminus.tminusInit().tminusStart();
       expect($tminus.text()).toEqual("3600");
     })
 
@@ -72,6 +70,16 @@ describe("The TMinus plugin", function() {
     });
 
     it("calls the expire event if time-left is zero", function() {
+      $tminus.tminusInit({ 
+        duration: 1,
+        expire_event: function() {console.log("expiration event")} 
+      }).tminusStart();
+
+      spyOn($tminus, "tminusExpireEvent");
+
+      setTimeout(function() {
+        expect($tminus.tminusExpireEvent()).toHaveBeenCalled();
+      }, 1500);
     });
   });
 
@@ -96,8 +104,7 @@ describe("The TMinus plugin", function() {
 
   describe("tminusTerminate", function() {
     beforeEach(function() {
-      $tminus.tminusInit();
-      $tminus.tminusStart();
+      $tminus.tminusInit().tminusStart();
     });
 
     it("sets time remaining to duration", function() {
@@ -115,8 +122,7 @@ describe("The TMinus plugin", function() {
 
   describe("tminusPause", function() {
     beforeEach(function() {
-      $tminus.tminusInit();
-      $tminus.tminusStart();
+      $tminus.tminusInit().tminusStart();
     });
 
     it("sets status to paused", function() {
